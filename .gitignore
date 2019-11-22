@@ -1,0 +1,8 @@
+$ cat .gitignore
+
+*.iml
+/target
+/.idea
+/input
+/output
+/clustering
