@@ -40,7 +40,7 @@ public class Centers {
         return centers;
     }
 
-    public static List<Point> readCenters(Configuration conf, Path path) throws IOException {
+    public static List<Point> read(Configuration conf, Path path) throws IOException {
         List<Point> centers = new ArrayList<>();
         BufferedReader reader = new BufferedReader(new InputStreamReader(FileSystem.get(conf).open(path)));
 
@@ -55,7 +55,7 @@ public class Centers {
         return centers;
     }
 
-    public static void writeCenters(Configuration configuration, List<Point> centers) throws IOException {
+    public static void write(Configuration configuration, List<Point> centers) throws IOException {
         FileWriter writer = new FileWriter(configuration.get(CenterProperty.name));
         writer.write("");
 

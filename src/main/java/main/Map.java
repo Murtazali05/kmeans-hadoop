@@ -18,7 +18,7 @@ public class Map
     @Override
     protected void setup(Context context) throws IOException {
         Configuration conf = context.getConfiguration();
-        centers = Centers.readCenters(conf, new Path(conf.get(Centers.CenterProperty.name)));
+        centers = Centers.read(conf, new Path(conf.get(Centers.CenterProperty.name)));
 
         FileSystem fs = FileSystem.get(conf);
         if (fs.exists(new Path(Centers.CenterProperty.name))) {
@@ -28,7 +28,7 @@ public class Map
 
     @Override
     protected void map(Object key, Text value, Context context) throws IOException, InterruptedException {
-        // Входные данные k центроидов и точки. Находим ближайшие центроиды для всех точек.
+        // key - номер строки в файле, value - точки. Находим ближайшие центроиды для всех точек.
         String[] coordinates = value.toString().split(",");
         Point point = new Point(Double.parseDouble(coordinates[0]), Double.parseDouble(coordinates[1]));
 

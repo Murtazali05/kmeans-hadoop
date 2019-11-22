@@ -20,7 +20,7 @@ public class Reduce
 
     @Override
     protected void reduce(Text key, Iterable<Point> values, Context context) throws IOException, InterruptedException {
-        // Входные данные - ценроиды со список точек ближайших к ним. Задача редьюсера вычислить новые центроиды для каждого списка точек.
+        // Входные данные - ценроиды и список точек ближайших к ним. Задача редьюсера вычислить новые центроиды.
         double x = Double.parseDouble(key.toString().split(",")[0]);
         double y = Double.parseDouble(key.toString().split(",")[1]);
         int count = 0;
@@ -41,6 +41,6 @@ public class Reduce
     protected void cleanup(Context context) throws IOException, InterruptedException {
         super.cleanup(context);
         Configuration conf = context.getConfiguration();
-        Centers.writeCenters(conf, centers);
+        Centers.write(conf, centers);
     }
 }

@@ -23,8 +23,8 @@ public class Main {
         Configuration conf = new Configuration();
         conf.set(Centers.CenterProperty.name, Centers.CenterProperty.value);
 
-        List<Point> current = Centers.readCenters(conf, new Path(conf.get(Centers.CenterProperty.name)));
-        List<Point> previous = current;
+        List<Point> previous = Centers.read(conf, new Path(conf.get(Centers.CenterProperty.name)));
+        List<Point> current;
 
         boolean changed = false;
         int code = 0;
@@ -54,7 +54,7 @@ public class Main {
             }
             code = job.waitForCompletion(true) ? 0 : 1;
 
-            current = Centers.readCenters(conf, new Path(conf.get(Centers.CenterProperty.name)));
+            current = Centers.read(conf, new Path(conf.get(Centers.CenterProperty.name)));
 
             if (current.equals(previous)) {
                 changed = true;

@@ -34,7 +34,11 @@ public class Point implements WritableComparable {
         Point other = (Point) o;
 
         if (!this.equals(other)) {
-            return 1;
+            if ((this.coordinateX - other.coordinateX) != 0) {
+                return (int) (this.coordinateX - other.coordinateX);
+            } else {
+                return (int) (this.coordinateY - other.coordinateY);
+            }
         }
         return 0;
     }
