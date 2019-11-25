@@ -12,22 +12,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Centers {
-    public static final Integer k = 2;
+    public static final Integer k = 5;
 
     public static class CenterProperty {
         public static final String name = "center.path";
         public static final String value = "clustering/centers/centers.txt";
     }
 
-    private static List<Point> generateCenters(Configuration configuration) throws IOException {
+    public static List<Point> generateCenters(Configuration configuration, Integer min, Integer max) throws IOException {
         List<Point> centers = new ArrayList<>();
 
         FileWriter writer = new FileWriter(configuration.get(CenterProperty.name));
         writer.write("");
 
         for (int i = 0; i < k; i++) {
-            double x = Math.random() * 20 - 10;
-            double y = Math.random() * 20 - 10;
+            double x = min + (max - min) * Math.random();
+            double y = min + (max - min) * Math.random();
             Point point = new Point(x, y);
             centers.add(point);
 
